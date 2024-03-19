@@ -1,11 +1,13 @@
 package main
 
 import (
-    "log"
-    "os"
-    "strings"
-    "github.com/gin-gonic/gin"
-    "github.com/wac24-xbublavy-xskriba/xskriba-ambulance-webapi/api"
+	"log"
+	"os"
+	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/wac24-xbublavy-xskriba/xskriba-ambulance-webapi/api"
+	"github.com/wac24-xbublavy-xskriba/xskriba-ambulance-webapi/internal/ambulance_wl"
 )
 
 func main() {
@@ -21,6 +23,8 @@ func main() {
     engine := gin.New()
     engine.Use(gin.Recovery())
     // request routings
+		ambulance_wl.AddRoutes(engine)
+
     engine.GET("/openapi", api.HandleOpenApi)
     engine.Run(":" + port)
 }
